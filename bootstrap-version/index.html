@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Service Desk – Bootstrap version</title>
+  <!-- Local Bootstrap 5.3.3 CSS (no CDN, works offline) -->
+  <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css">
+  <!-- Only a tiny custom file: focus ring colour + nothing that re-implements the grid -->
+  <link rel="stylesheet" href="assets/custom.css">
+</head>
+<body class="bg-body-tertiary">
+
+  <a class="visually-hidden-focusable btn btn-dark m-2 position-absolute" href="#main">Skip to requests</a>
+
+  <header class="bg-dark text-white py-3 mb-4">
+    <div class="container">
+      <p class="h4 mb-0">Campus Service Desk</p>
+    </div>
+  </header>
+
+  <!-- container > row > responsive columns -->
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Main column: full width at 360px, 8/12 from lg (>=992px) -->
+      <main id="main" class="col-12 col-lg-8">
+        <h1 class="h3 mb-3">Service requests</h1>
+
+        <!-- Alert (status message, announced politely by screen readers) -->
+        <div id="status-alert" class="alert alert-info" role="status">
+          Showing 3 sample requests. All data on this page is synthetic.
+        </div>
+
+        <!-- Arabic notice: lang="ar" + dir="rtl" on the element itself -->
+        <div class="alert alert-warning" lang="ar" dir="rtl" role="note">
+          تنبيه: هذه الصفحة تجريبية وتحتوي على بيانات وهمية فقط.
+        </div>
+
+        <section aria-labelledby="list-heading" class="mb-4">
+          <h2 id="list-heading" class="h5">Open requests</h2>
+          <ul class="list-group">
+            <li class="list-group-item d-flex flex-column flex-sm-row justify-content-between gap-2">
+              <div>
+                <strong>Wi-Fi drops in Library, floor 2</strong>
+                <div class="text-body-secondary small">Request #1001 · IT Support</div>
+              </div>
+              <span class="badge text-bg-warning align-self-start">In progress</span>
+            </li>
+            <li class="list-group-item d-flex flex-column flex-sm-row justify-content-between gap-2">
+              <div>
+                <strong>Projector bulb replacement, Room B204</strong>
+                <div class="text-body-secondary small">Request #1002 · Facilities</div>
+              </div>
+              <span class="badge text-bg-secondary align-self-start">Waiting</span>
+            </li>
+            <li class="list-group-item d-flex flex-column flex-sm-row justify-content-between gap-2">
+              <div>
+                <strong>Lab account password reset</strong>
+                <div class="text-body-secondary small">Request #1003 · IT Support</div>
+              </div>
+              <span class="badge text-bg-success align-self-start">Resolved</span>
+            </li>
+          </ul>
+
+          <!-- Interactive component: Bootstrap Modal (needs bootstrap.bundle.min.js) -->
+          <button type="button" class="btn btn-outline-primary mt-3"
+                  data-bs-toggle="modal" data-bs-target="#detailsModal">
+            View request #1001 details
+          </button>
+        </section>
+
+        <!-- Labeled form with native constraints -->
+        <section aria-labelledby="form-heading">
+          <h2 id="form-heading" class="h5">Submit a new request</h2>
+          <form id="request-form" class="card card-body" novalidate>
+            <div class="mb-3">
+              <label for="student-id" class="form-label">Student ID (8 digits)</label>
+              <input type="text" class="form-control" id="student-id" name="studentId"
+                     required pattern="[0-9]{8}" inputmode="numeric" maxlength="8"
+                     aria-describedby="student-id-help" autocomplete="off">
+              <div id="student-id-help" class="form-text">Use a synthetic ID such as 12345678.</div>
+              <div class="invalid-feedback">Enter exactly 8 digits.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">University email</label>
+              <input type="email" class="form-control" id="email" name="email" required
+                     autocomplete="off">
+              <div class="invalid-feedback">Enter a valid email address.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <select class="form-select" id="category" name="category" required>
+                <option value="" selected disabled>Choose…</option>
+                <option>IT Support</option>
+                <option>Facilities</option>
+                <option>Library</option>
+              </select>
+              <div class="invalid-feedback">Choose a category.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">Describe the problem (10–200 characters)</label>
+              <textarea class="form-control" id="description" name="description" rows="3"
+                        required minlength="10" maxlength="200"></textarea>
+              <div class="invalid-feedback">Write at least 10 characters.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary align-self-start">Submit request</button>
+          </form>
+        </section>
+      </main>
+
+      <!-- Supporting aside: stacks under main at 360px, 4/12 from lg -->
+      <aside class="col-12 col-lg-4" aria-labelledby="aside-heading">
+        <div class="card">
+          <div class="card-header" id="aside-heading">Service hours</div>
+          <div class="card-body">
+            <h2 class="card-title h6">Walk-in desk</h2>
+            <p class="card-text mb-2">Sunday – Thursday, 9:00 – 15:00</p>
+            <h2 class="card-title h6">Online requests</h2>
+            <p class="card-text mb-0">Answered within 2 working days.</p>
+          </div>
+          <div class="card-footer text-body-secondary small">Synthetic example data</div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- Modal markup -->
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title fs-5" id="detailsModalLabel">Request #1001</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Wi-Fi drops in Library, floor 2. Assigned to IT Support. Status: in progress.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Local Bootstrap JS bundle (includes Popper). Required by the Modal. -->
+  <script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
