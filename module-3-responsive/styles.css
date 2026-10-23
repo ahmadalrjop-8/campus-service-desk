@@ -1,0 +1,350 @@
+/* ==========================================================
+   Campus Service Desk - Module 3: Responsive Interface
+   Mobile-first. Organised as:
+   1. Design tokens
+   2. Base (reset, typography, focus)
+   3. Page layout (Grid)
+   4. Header and navigation (Flexbox)
+   5. Form
+   6. Table
+   7. Arabic / RTL notice
+   8. Wider layout (media query)
+   ========================================================== */
+
+/* 1. Design tokens -------------------------------------------------- */
+:root {
+  --space: 1rem;
+  --space-s: 0.5rem;
+  --space-l: 2rem;
+
+  --color-text: #1b1f24;
+  --color-muted: #4a5560;
+  --color-bg: #ffffff;
+  --color-wash: #eef3f6;
+  --color-line: #c5d0d8;
+  --color-accent: #0b5c63;
+  --color-link: #0a4d8c;
+  --color-focus: #b45309;
+
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --measure: 65ch;
+}
+
+/* 2. Base ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  margin-block: 0 var(--space-s);
+}
+
+h1 {
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+p,
+li {
+  max-width: var(--measure);
+  overflow-wrap: anywhere;
+}
+
+p {
+  margin-block: 0 var(--space);
+}
+
+a {
+  color: var(--color-link);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.15em;
+}
+
+/* Visible keyboard focus on every interactive element */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* Skip link: out of the layout until it receives focus */
+.skip-link {
+  position: absolute;
+  inset-inline-start: var(--space-s);
+  inset-block-start: -4rem;
+  padding: var(--space-s) var(--space);
+  background: var(--color-bg);
+  border: 2px solid var(--color-accent);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  inset-block-start: var(--space-s);
+}
+
+/* 3. Page layout (Grid) ---------------------------------------------
+   Header, main, aside and footer are placed in a two-dimensional
+   grid (rows AND columns). Narrow screens get one column, in the
+   same order as the HTML source. */
+body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "header"
+    "main"
+    "aside"
+    "footer";
+  gap: var(--space-l);
+  width: min(100% - 1.5rem, 72rem);
+  margin-inline: auto;
+  padding-block: var(--space);
+}
+
+header {
+  grid-area: header;
+}
+
+main {
+  grid-area: main;
+}
+
+aside {
+  grid-area: aside;
+}
+
+footer {
+  grid-area: footer;
+}
+
+main section {
+  margin-block-start: var(--space-l);
+}
+
+aside {
+  align-self: start;
+  padding: var(--space);
+  background: var(--color-wash);
+  border-inline-start: 4px solid var(--color-accent);
+}
+
+aside ul {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+}
+
+footer {
+  padding-block-start: var(--space);
+  border-block-start: 1px solid var(--color-line);
+  color: var(--color-muted);
+}
+
+/* 4. Header and navigation (Flexbox) --------------------------------
+   The brand and the links form ONE row that must wrap when space
+   runs out, so Flexbox (one-dimensional) is the right tool. */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s) var(--space-l);
+  padding-block-end: var(--space);
+  border-block-end: 4px solid var(--color-accent);
+}
+
+.brand {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+header nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-s);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+header nav a {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+}
+
+/* 5. Form ------------------------------------------------------------ */
+form > * + * {
+  margin-block-start: var(--space);
+}
+
+label {
+  display: block;
+  margin-block-end: 0.25rem;
+  font-weight: 600;
+}
+
+.field input,
+.field select,
+.field textarea {
+  display: block;
+  width: 100%;
+  max-width: 32rem;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  color: inherit;
+  background: var(--color-bg);
+  border: 1px solid var(--color-muted);
+  border-radius: 4px;
+}
+
+.field textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+fieldset {
+  min-width: 0; /* fieldsets default to min-content width and can overflow */
+  margin-inline: 0;
+  padding: var(--space);
+  border: 1px solid var(--color-line);
+}
+
+legend {
+  padding-inline: 0.25rem;
+  font-weight: 600;
+}
+
+.choice {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-s);
+}
+
+.choice + .choice {
+  margin-block-start: var(--space-s);
+}
+
+.choice input {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+}
+
+.choice label {
+  margin: 0;
+  font-weight: 400;
+}
+
+button {
+  min-height: 2.75rem; /* comfortable touch target */
+  padding: 0.6rem 1.5rem;
+  font: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #084850;
+  border-color: #084850;
+}
+
+/* 6. Table ------------------------------------------------------------
+   The wrapper scrolls on its own if the table is wider than the
+   screen, so the page itself never scrolls sideways. */
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+caption {
+  padding-block-end: var(--space-s);
+  text-align: start;
+  font-weight: 600;
+}
+
+th,
+td {
+  padding: 0.5rem 0.25rem;
+  text-align: start;
+  vertical-align: top;
+  border-block-end: 1px solid var(--color-line);
+}
+
+thead th {
+  background: var(--color-wash);
+}
+
+/* 7. Arabic / RTL notice --------------------------------------------
+   Logical properties (padding-inline, border-inline-start) flip
+   automatically with dir="rtl", so no left/right rules are needed. */
+.notice {
+  padding-block: 0.75rem;
+  padding-inline: var(--space);
+  background: var(--color-wash);
+  border-inline-start: 4px solid var(--color-accent);
+}
+
+.notice:lang(ar) {
+  line-height: 1.8;
+}
+
+/* 8. Wider layout -----------------------------------------------------
+   Breakpoint chosen by content: when main text lines would pass the
+   comfortable reading length and the form leaves unused space, the
+   status panel moves beside main instead of below it. */
+@media (min-width: 52em) {
+  body {
+    grid-template-columns: minmax(0, 2fr) minmax(15rem, 1fr);
+    grid-template-areas:
+      "header header"
+      "main   aside"
+      "footer footer";
+    gap: var(--space-l) calc(var(--space) * 3);
+  }
+
+  table {
+    font-size: 1rem;
+  }
+
+  th,
+  td {
+    padding: 0.6rem 0.75rem;
+  }
+}

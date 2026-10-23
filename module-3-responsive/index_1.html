@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Service Desk – Submit and Track Service Requests</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <p class="brand">Campus Service Desk</p>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#new-request">Submit a request</a></li>
+        <li><a href="#recent-requests">Your recent requests</a></li>
+        <li><a href="#faq">Common questions</a></li>
+        <li><a href="#service-status">Service status</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <h1>Campus Service Desk</h1>
+    <p>Report an IT, facilities, or library problem and follow its progress. Students and staff can use this page.</p>
+    <p class="notice" lang="ar" dir="rtl">يمكنك كتابة وصف المشكلة بالعربية أو بالإنجليزية.</p>
+
+    <section id="new-request" aria-labelledby="new-request-heading">
+      <h2 id="new-request-heading">Submit a request</h2>
+      <p>Fields marked required must be completed before sending.</p>
+
+      <form action="#" method="post">
+        <div class="field">
+          <label for="full-name">Full name (required)</label>
+          <input type="text" id="full-name" name="full_name" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="email">University email (required)</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="category">Service category (required)</label>
+          <select id="category" name="category" required>
+            <option value="">Choose a category</option>
+            <option value="it">IT support</option>
+            <option value="facilities">Facilities and maintenance</option>
+            <option value="library">Library services</option>
+          </select>
+        </div>
+
+        <fieldset>
+          <legend>Urgency</legend>
+          <div class="choice">
+            <input type="radio" id="urgency-low" name="urgency" value="low" checked>
+            <label for="urgency-low">Low – can wait a few days</label>
+          </div>
+          <div class="choice">
+            <input type="radio" id="urgency-high" name="urgency" value="high">
+            <label for="urgency-high">High – blocks my study or work</label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="description">Describe the problem (required)</label>
+          <textarea id="description" name="description" rows="5" required></textarea>
+        </div>
+
+        <div class="choice">
+          <input type="checkbox" id="updates" name="updates" value="yes">
+          <label for="updates">Email me when the status changes</label>
+        </div>
+
+        <button type="submit">Send request</button>
+      </form>
+    </section>
+
+    <section id="recent-requests" aria-labelledby="recent-requests-heading">
+      <h2 id="recent-requests-heading">Your recent requests</h2>
+      <div class="table-wrap" role="region" aria-labelledby="recent-requests-heading" tabindex="0">
+      <table>
+        <caption>Requests submitted in the last 30 days</caption>
+        <thead>
+          <tr>
+            <th scope="col">Reference</th>
+            <th scope="col">Category</th>
+            <th scope="col">Submitted</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">SD-1042</th>
+            <td>IT support</td>
+            <td><time datetime="2026-10-02">2 October 2026</time></td>
+            <td>In progress</td>
+          </tr>
+          <tr>
+            <th scope="row">SD-1037</th>
+            <td>Facilities and maintenance</td>
+            <td><time datetime="2026-09-28">28 September 2026</time></td>
+            <td>Resolved</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Common questions</h2>
+
+      <article>
+        <h3>How long does a request take?</h3>
+        <p>High urgency requests are answered within one working day. Low urgency requests are answered within three working days.</p>
+      </article>
+
+      <article>
+        <h3>Can I change a request after sending it?</h3>
+        <p>Reply to the confirmation email with the reference number and the new details. <a href="mailto:servicedesk@example.edu">Email the service desk</a> if you did not receive a confirmation.</p>
+      </article>
+    </section>
+  </main>
+
+  <aside id="service-status" aria-labelledby="status-heading">
+    <h2 id="status-heading">Service status</h2>
+    <ul>
+      <li>Wi-Fi: operating normally</li>
+      <li>Library catalogue: operating normally</li>
+      <li>Building B elevators: maintenance until 14:00</li>
+    </ul>
+  </aside>
+
+  <footer>
+    <p>Campus Service Desk, open Sunday to Thursday, 08:00–16:00.</p>
+    <p><a href="mailto:servicedesk@example.edu">servicedesk@example.edu</a></p>
+  </footer>
+
+</body>
+</html>
